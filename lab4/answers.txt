@@ -1,0 +1,32 @@
+1.	Number of operations per element = # elements in a mask * 2 + 1 = 5 * 2 + 1 = 26
+	Total number of operations = m * n * operations per element = m * n * 26
+	computation rate = # of operations / time taken
+
+	size          |     # of operations   |   time in seconds    |   rate in operations per second
+	150 x 250     |         37,500        |    0.000070          |   	535,714,285.71
+    300 x 500	  |      3,900,000		  |    0.000133          |   29,323,308,270.67
+	600 x 1000    |     15,600,000        |    0.000417          |   37,410,071,943.44
+	1200 x 2000   |     62,400,000		  |    0.001534          |   40,677,966,101.69
+	2400 x 4000   |    230,400,000		  |    0.006001			 |   38,393,601,066.48
+	4800 x 8000   |    998,400,000		  |    0.023838			 |   41,882,708,280.89
+	9600 x 16000  |  1,996,800,000		  |    0.095217 		 |   20,971,045,086.48
+	19200 x 32000    unable to allocate device memory
+
+	I chose to double the input image size each iteration to show a consistant trend line without using a very large number of input sizes
+	This trend shows that the ccomputation rate grows up to a point, then levels out.  After a certain point, though, it decreases again.
+
+2.	Overhead = allocation time + copy from host to device time + copy back time
+	Total time = overhead + kernel time
+	Percentage of time used as overhead = overhead / total time * 100%
+
+	size          |     Overhead          |   total time         |   percent overhead
+	150 x 250     |       0.058179        |    0.058249          |   	99.89 %
+    300 x 500	  |       0.04855		  |    0.048683          |      99.73 %
+	600 x 1000    |       0.055437        |    0.055851          |   	99.26 %
+	1200 x 2000   |       0.063435        |    0.064969          |   	97.64 %
+	2400 x 4000   |       0.072629        |    0.07863           |   	92.37 %
+	4800 x 8000   |       0.136524        |    0.160362          |   	85.13 %
+	9600 x 16000  |       0.382593        |    0.47781           |   	80.07 %
+	19200 x 32000    unable to allocate device memory
+
+	The percentage of time spent on overhead decreases as the the input size increases.

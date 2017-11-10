@@ -1,0 +1,15 @@
+I handled arrays not in powers of two by checking first if the index of the item to be loaded is less than the size of the input array. If it is not, then I loaded a zero instead of the value. This allows the computation part to continue as normal. I also checked that the index was less than the size of the input array when saving the vector back to the inout vector. This is the part of the code that handled this:
+
+	if(idx < size)
+		in_s[threadIdx.x] = inout[idx];
+	else
+		in_s[threadIdx.x] = 0.0f;
+
+and
+
+	if (thid + blid < size)
+		inout[blid + thid] = in_s[thid];
+	if (thid + BLOCK_SIZE + blid < size)
+		inout[thid+BLOCK_SIZE + blid] = in_s[thid+BLOCK_SIZE];
+
+The only performance-enhancing optimization that I added was the one you mentioned in the NVidia document on handling the loads and writes to and from shared memory. This avoids the shared memory bank conflict by allowing adjacent threads to load adjacent items. 

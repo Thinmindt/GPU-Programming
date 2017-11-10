@@ -1,0 +1,1 @@
+When I ran nvcc on my kernel, I got 

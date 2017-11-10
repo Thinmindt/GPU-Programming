@@ -1,0 +1,8 @@
+1)	For matrix M, each element is accessed k x n times. For matrix N, each element is accessed m * k times. 
+	Each thread has to access each element of M k times and each element of N k times.
+	There are n number of threads per row of M, and m number of threads per column of N
+
+2)	There is a 1:1 memory-access to floating-point computation in each thread. 
+	Each iteration in the for loop requires a load from each matrix, so 2 loads total. 
+	Each iteration in the for loop also requires a multiply and an add, so 2 floating point computations total.
+	2:2 = 1:1 

@@ -1,0 +1,7 @@
+1.
+	Each block has to synchronize threads once after loading the values into shared memory, then log2(BLOCK_SIZE) for the computation part. This comes out to 1 + log2(512) = 10.
+
+2.
+	Minimum = 1
+	Maximum = 9
+	Average = ((1 * 9) + (2 * 8) + (4 * 7) + (8 * 6) + (16 * 5) + (32 * 4) + (64 * 3) + (128 * 2) + (256 * 1)) / 512  = 1.98
